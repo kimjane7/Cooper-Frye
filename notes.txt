@@ -1,0 +1,53 @@
+different particles have different average velocity, they flow differently
+
+hydro does not assume this, so we have to build interface between two descriptions: hydro & cascade (smooth & lumpy)
+
+hypersurface (3D) is the boundary between hydro and cascade (4D) ALL AT SAME FREEZE OUT TEMPERATURE
+
+hypersurface has dimensions of volume (area*time) AND direction
+
+dOmega_mu = d^4x partial_mu-Theta(C(x)), C(x)=Tf-T(x)
+          = d^4x delta(Tf-T(x)) partial_mu-T(x)
+
+partial_mu = partial/partialx^mu
+r^alpha = (t,x,y,z)
+r_alpha = (t,-x,-y,-z)
+r^2 = r^alpha*r_alpha
+p^alpha = (E,px,py,pz)
+
+example: E_alpha = -partialV/partialx^alpha
+
+amount of charge that comes through hypersurface Delta Q = integral d^4x delta(Tf-T(x)) partial_mu-T(x) j^mu(x)
+current density j^mu(x)
+
+goal: want to make particles
+
+chance of making particle at given time is proportional to "all this"
+
+j^mu_hadronspecies = integral d^3p/(2 pi hbar)^3 f(pvec,x) (p^mu/E) Theta(p dot Omega)
+f(pvec,x) = exp(-(E-mu)/T)/(1+- exp(-(E-mu)/T)) = exp(-pu/T)/(1+- exp(-pu/T)) <--- at freeze out temp!
+E^2=p^2+m^2
+
+p^mu/E is velocity
+
+number of hadrons that goes through hypersurface = Delta Omega_mu j_h^mu
+
+MONTE CARLO
+
+say i have a file of hypersurface elements locations
+make particles after summing over hypersurface elements
+
+boost invariance = we're in an area that eta changes so slow that you can assume eta is constant
+
+Pratt changed how he does 2D:
+
+DeltaOmega_mu = integral d^3x integral dt partial_mu T delta(T-Tf), where delta(T-Tf) = delta(t-t_s(rvec))/(partial T/partial t)
+              = Deltax Deltay Deltaz partial_mu T/(partialT/partialtau) <--- denominator can be zero if temperature is staying constant at freeze out Tf
+
+for each hypersurface element, pick x, y, z, or t such that gradient in that direction is the biggest
+
+DeltaOmega_0 = Deltax Deltay Deltaz
+DeltaOmega_1 = Deltay Deltaz Deltat ((T(t,x+dx/2)-T(t,x-dx/2))/(T(t+dt/2,x)-T(t-dt/2,x))
+
+
+1/velocityofsurface = partialx T/ partialE T
